@@ -37,12 +37,11 @@ title ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß - Neko Minecraft
 echo ×¼±¸ÏÂÔØing.....
 echo ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß...
 taskkill /f /t /im Nekomc.exe
-rmdir /s/q temp
 rmdir /s/q .minecraft
 mkdir .minecraft
-mkdir temp
 cd .minecraft
 mkdir apps
+mkdir temp
 mkdir resourcepacks
 mkdir shaderpacks
 mkdir mods
@@ -51,7 +50,6 @@ mkdir hash
 mkdir tools
 mkdir 7z
 mkdir error
-cd ..
 cd ..
 
 
@@ -64,17 +62,17 @@ cd ..
 
 
 title ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß - Neko Minecraft
-curl --user-agent "Dg/Meincraft /file /112.bat" -o ./temp/7z.zip https://dg.limoe.net/apps/7z/m7z.zip & timeout /nobreak /t 1
-echo 7zipÆÚÍû¹şÏ£ÖµÎª£ºd02730f16de706e71eb52c38b1f76841eb15eb0411de5fd54b80edcdad8302b9
-for /F %%i in ('powershell Get-FileHash Mini.zip -Algorithm SHA256') do @set zzip=%%i 
+curl --user-agent "Dg/Meincraft /file /112.bat" -o .\temp\m7z.zip https://dg.limoe.net/apps/7z/m7z.zip & timeout /nobreak /t 1
+echo 7zipÆÚÍû¹şÏ£ÖµÎª£ºD02730F16DE706E71EB52C38B1F76841EB15EB0411DE5FD54B80EDCDAD8302B9
+for /F "delims=" %%i in ('powershell Get-FileHash .\temp\m7z.zip -Algorithm SHA256') do @set zzip=%%i 
 echo ÄúÏÂÔØµ½µÄÎÄ¼ş£º
 echo %zzip%
 echo ÇëÈ·ÈÏ¹şÏ£Öµ(hash)ÊÇ·ñÒ»ÖÂ£¡ 
 echo Èç¹û²»Ò»ÖÂ ÎÄ¼ş¿ÉÄÜÒÑ±»ÖĞ¼äÈË¸ü¸Ä
 echo Èç¹ûÒ»ÖÂ Çë°´ÈÎÒâ¼ü¼ÌĞøÔËĞĞ 
-echo ·ñÔòÇë³¢ÊÔÖØĞÂÔËĞĞ ¶à´ÎÈÔ³öÏÖ ÇëÁªÏµ¹ÜÀíÔ±
+echo ·ñÔòÇë¹Ø±Õ´°¿Ú ³¢ÊÔÖØĞÂÔËĞĞ ¶à´ÎÈÔ³öÏÖ ÇëÁªÏµ¹ÜÀíÔ±
 pause
-powershell -command "Expand-Archive -Force '%~dp0./temp/m7z.zip' '%~dp0./.minecraft/apps/7z/'"
+powershell -command "Expand-Archive -Force '%~dp0.\temp\m7z.zip' '%~dp0.\apps\7z\'"
 
 
 
@@ -88,12 +86,12 @@ powershell -command "Expand-Archive -Force '%~dp0./temp/m7z.zip' '%~dp0./.minecr
 :dgminitools
 title ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß - Neko Minecraft
 echo ÏÂÔØing...
-curl --user-agent "Dg/Meincraft /file /112.bat" -o ./temp/minitools.7z https://dg.limoe.net/apps/tools/mini.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/minitools.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/minitools.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/maintools.7z') do @set minitoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolssha256.txt -q https://dg.limoe.net/apps/tools/mini7zsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolssha256.txt') do @set getminitoolshash=%%i 
+curl --user-agent "Dg/Meincraft /file /112.bat" -o .\temp\minitools.7z https://dg.limoe.net/apps/tools/mini.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\minitools.7z
+powershell -command "Expand-Archive -Force '%~dp0.\minitools.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\maintools.7z') do @set minitoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolssha256.txt -q https://dg.limoe.net/apps/tools/mini7zsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolssha256.txt') do @set getminitoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgminitools1 )
 if "%minitoolshash%" == "%getminitoolshash%" ( echo Ö÷ÒªÎÄ¼şĞ£Ñé³É¹¦£¡& goto dg112bathash  )
 
@@ -101,35 +99,35 @@ if "%minitoolshash%" == "%getminitoolshash%" ( echo Ö÷ÒªÎÄ¼şĞ£Ñé³É¹¦£¡& goto dg1
 
 :dgminitools1
 curl --user-agent "Dg/Meincraft /file /112.bat" -o ./temp/minitools.7z https://dg1.limoe.net/apps/tools/mini.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/minitools.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/minitools.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/minitools.7z') do @set minitoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolssha256.txt -q https://dg1.limoe.net/apps/tools/minisha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolssha256.txt') do @set getminitoolshash=%%i 
+powershell .\apps\7z\7za.exe e -y .\temp\minitools.7z
+powershell -command "Expand-Archive -Force '%~dp0.\minitools.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\minitools.7z') do @set minitoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolssha256.txt -q https://dg1.limoe.net/apps/tools/minisha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolssha256.txt') do @set getminitoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgminitools2 )
 if "%minitoolshash%" == "%getminitoolshash%" ( echo Ö÷ÒªÎÄ¼şĞ£Ñé³É¹¦£¡ & goto dg112bathash )
 
 : dg2
 
  :dgminitools2
-curl --user-agent "Dg/Meincraft /file /112.bat" -o ./temp/minitools.7z https://dg2.limoe.net/apps/tools/mini.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/minitools.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/minitools.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/minitools.7z') do @set minitoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolssha256.txt -q https://dg2.limoe.net/apps/tools/minisha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolssha256.txt') do @set getminitoolshash=%%i 
+curl --user-agent "Dg/Meincraft /file /112.bat" -o .\temp\minitools.7z https://dg2.limoe.net/apps/tools/mini.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\minitools.7z
+powershell -command "Expand-Archive -Force '%~dp0.\minitools.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\minitools.7z') do @set minitoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolssha256.txt -q https://dg2.limoe.net/apps/tools/minisha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolssha256.txt') do @set getminitoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgminitools3 )
 if "%minitoolshash%" == "%getminitoolshash%" ( echo Ö÷ÒªÎÄ¼şĞ£Ñé³É¹¦£¡ & goto dg112bathash )
 
 : dg3
 
  :dgminitools3
-curl --user-agent "Dg/Meincraft /file /112.bat" -o ./temp/minitools.7z https://dg3.limoe.net/apps/tools/mini.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/minitools.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/minitools.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/minitools.7z') do @set minitoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolssha256.txt -q https://dg3.limoe.net/apps/tools/minisha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolssha256.txt') do @set getminitoolshash=%%i 
+curl --user-agent "Dg/Meincraft /file /112.bat" -o .\temp\minitools.7z https://dg3.limoe.net/apps/tools/mini.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\minitools.7z
+powershell -command "Expand-Archive -Force '%~dp0.\minitools.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\minitools.7z') do @set minitoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolssha256.txt -q https://dg3.limoe.net/apps/tools/minisha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolssha256.txt') do @set getminitoolshash=%%i 
 if "%getmaintoolshash%" == "" ( title error:dg1 & echo error:dg1 & echo ÏÂÔØÎÄ¼ş²»ÕıÈ·£¡ & echo ¶à´ÎÏÂÔØÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgminitools )
 if "%minitoolshash%" == "%getminitoolshash%" ( echo Ö÷ÒªÎÄ¼şĞ£Ñé³É¹¦£¡ & goto dg112bathash ) else ( 
  title error:dg1 & title error:dg1 & echo ÏÂÔØÖ÷ÒªÎÄ¼şÊ±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto dgminitools
@@ -152,38 +150,39 @@ if "%minitoolshash%" == "%getminitoolshash%" ( echo Ö÷ÒªÎÄ¼şĞ£Ñé³É¹¦£¡ & goto dg
 
 
 :dg112bathash
+del .\minitools.zip
 title ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß - Neko Minecraft
 echo ÏÂÔØing...
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe 112.bat') do @set bat112hash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getbat112hash.txt -q https://dg.limoe.net/mc/up/v1.0bat.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getbat112hash.txt') do @set getbat112hash=%%i
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe 112.bat') do @set bat112hash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\getbat112hash.txt -q https://dg.limoe.net/mc/up/v1.0bat.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\getbat112hash.txt') do @set getbat112hash=%%i
 if "%getbat112hash%" == "" ( goto dg112bathash1 )
 if "%bat112hash%" == "%getbat112hash%" ( echo  ½Å±¾ÑéÖ¤³É¹¦£¡& goto dgbatupdatev )
 
 : dg1
 
 :dg112bathash1
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe 112.bat') do @set bat112hash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getbat112hash.txt -q https://dg1.limoe.net/mc/up/v1.0bat.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getbat112hash.txt') do @set getbat112hash=%%i
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe 112.bat') do @set bat112hash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\getbat112hash.txt -q https://dg1.limoe.net/mc/up/v1.0bat.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\getbat112hash.txt') do @set getbat112hash=%%i
 if "%getbat112hash%" == "" ( goto dg112bathash2 )
 if "%bat112hash%" == "%getbat112hash%" ( echo  ½Å±¾ÑéÖ¤³É¹¦£¡& goto dgbatupdatev )
 
 : dg2
 
 :dg112bathash2
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe 112.bat') do @set bat112hash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getbat112hash.txt -q https://dg2.limoe.net/mc/up/v1.0bat.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getbat112hash.txt') do @set getbat112hash=%%i
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe 112.bat') do @set bat112hash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\getbat112hash.txt -q https://dg2.limoe.net/mc/up/v1.0bat.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\getbat112hash.txt') do @set getbat112hash=%%i
 if "%getbat112hash%" == "" ( goto dg112bathash3 )
 if "%bat112hash%" == "%getbat112hash%" ( echo  ½Å±¾ÑéÖ¤³É¹¦£¡& goto dgbatupdatev )
 
 : dg3
 
 :dg112bathash3
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe 112.bat') do @set bat112hash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getbat112hash.txt -q https://dg3.limoe.net/mc/up/v1.0bat.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getbat112hash.txt') do @set getbat112hash=%%i
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe 112.bat') do @set bat112hash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\getbat112hash.txt -q https://dg3.limoe.net/mc/up/v1.0bat.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\getbat112hash.txt') do @set getbat112hash=%%i
 if "%getbat112hash%" == "" ( title error code : dg2 & echo error code : dg2 & echo ÏÂÔØÎÄ¼ş²»ÕıÈ·£¡ & echo ¶à´ÎÏÂÔØÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dg112bathash )
 if "%bat112hash%" == "%getbat112hash%" ( echo  ½Å±¾ÑéÖ¤³É¹¦£¡& goto dgbatupdatev ) else (  
    del 112.bat & title error:dg2 & title error:dg2 & echo ½Å±¾²»ÍêÕû»òÒÑ±»¸ü¸Ä£¡ & echo ÇëÖØĞÂÏÂÔØ½Å±¾»òÁªÏµ¹ÜÀíÔ±£¡ & echo °´ÈÎÒâ¼üÍË³ö & pause & goto et )
@@ -206,29 +205,29 @@ if "%bat112hash%" == "%getbat112hash%" ( echo  ½Å±¾ÑéÖ¤³É¹¦£¡& goto dgbatupdatev
 :dgbatupdatev
 title ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß - Neko Minecraft
 echo ÏÂÔØing...
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/upbat.txt -q https://dg.limoe.net/mc/up/upbat.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/upbat.txt') do @set upbatv=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\upbat.txt -q https://dg.limoe.net/mc/up/upbat.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\upbat.txt') do @set upbatv=%%i 
 if "%upbatv%" == "" ( goto dgbatupdatev1 ) else ( goto dgbatupdatevo)
 
 : dg1
 
 :dgbatupdatev1
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/upbat.txt -q https://dg1.limoe.net/mc/up/upbat.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/upbat.txt') do @set upbatv=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\upbat.txt -q https://dg1.limoe.net/mc/up/upbat.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\upbat.txt') do @set upbatv=%%i 
 if "%upbatv%" == "" ( goto dgbatupdatev2 ) else ( goto dgbatupdatevo)
 
 : dg2
 
 :dgbatupdatev2
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/upbat.txt -q https://dg2.limoe.net/mc/up/upbat.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/upbat.txt') do @set upbatv=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\upbat.txt -q https://dg2.limoe.net/mc/up/upbat.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\upbat.txt') do @set upbatv=%%i 
 if "%upbatv%" == "" ( goto dgbatupdatev3 ) else ( goto dgbatupdatevo)
 
 : dg3
 
 :dgbatupdatev3
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/upbat.txt -q https://dg1.limoe.net/mc/up/upbat.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/upbat.txt') do @set upbatv=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\upbat.txt -q https://dg1.limoe.net/mc/up/upbat.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\upbat.txt') do @set upbatv=%%i 
 if "%upbatv%" == "" ( title error code : dg3 & echo error code : dg3 & echo ¼ì²é¸üĞÂÊ§°Ü£¡ & echo °´ÈÎÒâ¼üÔÙ´Î³¢ÊÔ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgbatupdatev ) else ( goto dgbatupdatevo )
 
 :dgbatupdatevo
@@ -242,59 +241,61 @@ if "1.0 "=="%upbatv%" (
 
 :dgbatupdatehash
 title ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß - Neko Minecraft
- powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getnewbatsha256.txt -q https://dg.limoe.net/mc/up/batsha256.json & timeout /nobreak /t 1
- for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getnewbatsha256.txt') do @set getnewbat112sha256=%%i 
+ powershell .\apps\wget\wget.exe -O .\temp\getnewbatsha256.txt -q https://dg.limoe.net/mc/up/batsha256.json & timeout /nobreak /t 1
+ for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\getnewbatsha256.txt') do @set getnewbat112sha256=%%i 
 if "%upbatv%" == "" ( goto dgbatupdatehash1 ) else ( goto dgbatupdatehasho )
 
 : dg1
 
 :dgbatupdatehash1
- powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getnewbatsha256.txt -q https://dg1.limoe.net/mc/up/batsha256.json & timeout /nobreak /t 1
- for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getnewbatsha256.txt') do @set getnewbat112sha256=%%i 
+ powershell .\apps\wget\wget.exe -O .\temp\getnewbatsha256.txt -q https://dg1.limoe.net/mc/up/batsha256.json & timeout /nobreak /t 1
+ for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\getnewbatsha256.txt') do @set getnewbat112sha256=%%i 
 if "%upbatv%" == "" ( goto dgbatupdatehash2 ) else ( goto dgbatupdatehasho )
 
 : dg2
 
 :dgbatupdatehash2
- powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getnewbatsha256.txt -q https://dg2.limoe.net/mc/up/batsha256.json & timeout /nobreak /t 1
- for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getnewbatsha256.txt') do @set getnewbat112sha256=%%i 
+ powershell .\apps\wget\wget.exe -O .\temp\getnewbatsha256.txt -q https://dg2.limoe.net/mc/up/batsha256.json & timeout /nobreak /t 1
+ for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\getnewbatsha256.txt') do @set getnewbat112sha256=%%i 
 if "%upbatv%" == "" ( goto dgbatupdatehash3 ) else ( goto dgbatupdatehasho )
 
 : dg3
 
 :dgbatupdatehash3
- powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getnewbatsha256.txt -q https://dg3.limoe.net/mc/up/batsha256.json & timeout /nobreak /t 1
- for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getnewbatsha256.txt') do @set getnewbat112sha256=%%i 
+ powershell .\apps\wget\wget.exe -O .\temp\getnewbatsha256.txt -q https://dg3.limoe.net/mc/up/batsha256.json & timeout /nobreak /t 1
+ for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\getnewbatsha256.txt') do @set getnewbat112sha256=%%i 
 if "%upbatv%" == "" (  title error code : dg4 & echo error code : dg4 & echo ÏÂÔØÎÄ¼şÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgbatupdatehash ) else ( goto dgbatupdatehasho )
 
 :dgbatupdatehasho
+ cd ..
  del 112.bat
+
 
 : ÏÂÔØ¸üĞÂ½Å±¾ dg5
 
 : dg
 :dgbatupdate
 title ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß - Neko Minecraft
- powershell ./.minecraft/apps/wget/wget.exe -O 112.bat https://dg.limoe.net/mc/up/112.bat & timeout /nobreak /t 1
- for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe 112.bat') do @set newbat112sha256=%%i
+ powershell .\.minecraft\apps\wget\wget.exe -O 112.bat https://dg.limoe.net/mc/up/112.bat & timeout /nobreak /t 1
+ for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe 112.bat') do @set newbat112sha256=%%i
  if "%newbat112sha256%" == "%getnewbat112sha256%" ( echo ¸üĞÂÑéÖ¤³É¹¦£¡  & echo ×¼±¸ÖØĞÂÔËĞĞing... & call 112.bat & goto et ) else ( goto dgbatupdate1 )
 
 : dg1
 :dgbatupdate1
- powershell ./.minecraft/apps/wget/wget.exe -O 112.bat https://dg1.limoe.net/mc/up/112.bat & timeout /nobreak /t 1
- for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe 112.bat') do @set newbat112sha256=%%i
+ powershell .\.minecraft\apps\wget\wget.exe -O 112.bat https://dg1.limoe.net/mc/up/112.bat & timeout /nobreak /t 1
+ for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe 112.bat') do @set newbat112sha256=%%i
  if "%newbat112sha256%" == "%getnewbat112sha256%" ( echo ¸üĞÂÑéÖ¤³É¹¦£¡  & echo ×¼±¸ÖØĞÂÔËĞĞing... & call 112.bat & goto et ) else ( goto dgbatupdate2 )
 
  : dg2
 :dgbatupdate2
- powershell ./.minecraft/apps/wget/wget.exe -O 112.bat https://dg2.limoe.net/mc/up/112.bat & timeout /nobreak /t 1
- for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe 112.bat') do @set newbat112sha256=%%i
+ powershell .\.minecraft\apps\wget\wget.exe -O 112.bat https://dg2.limoe.net/mc/up/112.bat & timeout /nobreak /t 1
+ for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe 112.bat') do @set newbat112sha256=%%i
  if "%newbat112sha256%" == "%getnewbat112sha256%" ( echo ¸üĞÂÑéÖ¤³É¹¦£¡  & echo ×¼±¸ÖØĞÂÔËĞĞing... & call 112.bat & goto et ) else ( goto dgbatupdate3 )
 
  : dg3
 :dgbatupdate3
-  powershell ./.minecraft/apps/wget/wget.exe -O 112.bat https://dg3.limoe.net/mc/up/112.bat & timeout /nobreak /t 1
- for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe 112.bat') do @set newbat112sha256=%%i
+  powershell .\.minecraft\apps\wget\wget.exe -O 112.bat https://dg3.limoe.net/mc/up/112.bat & timeout /nobreak /t 1
+ for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe 112.bat') do @set newbat112sha256=%%i
  if "%newbat112sha256%" == "%getnewbat112sha256%" ( echo ¸üĞÂÑéÖ¤³É¹¦£¡  & echo ×¼±¸ÖØĞÂÔËĞĞing... & call 112.bat & goto et ) else ( title error code : dg5 & echo error code : dg5 & echo ÏÂÔØ¸üĞÂÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgbatupdate )
 
 )
@@ -311,13 +312,16 @@ title ÕıÔÚÏÂÔØ±ØÒª¹¤¾ß - Neko Minecraft
 : ÏÂÔØÖ¤Êé
 
 :dgcrtall
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/crtaddall.zip https://ca.owq.li/root/all/crt/addall.zip & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/crtaddall.zip') do @set crtziphash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getcrtsha256.txt -q https://ca.owq.li/root/all/crt/addallzipsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/getcrtsha256.txt') do @set getcrtsha256=%%i 
-if "%getcrtsha256%" == "" ( title error code : dg6 & echo error code : dg6 & echo ´íÎó£¡hash²»ÄÜÎª¿Õ£¡ & echo ¿ÉÄÜÔ­Òò£º & echo ÍøÂç²»ÎÈ¶¨»òÕßÎ¬»¤ÖĞ... & echo °´ÈÎÒâ¼ü³¢ÊÔÖØĞÂÏÂÔØ »òÁªÏµ¹ÜÀíÔ± & pause & goto dgcrtall)
+cd .minecraft
+
+:dgcrtall0
+powershell .\apps\wget\wget.exe -O .\temp\crtaddall.zip https://ca.owq.li/root/all/crt/addall.zip & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\crtaddall.zip') do @set crtziphash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getcrtsha256.txt -q https://ca.owq.li/root/all/crt/addallzipsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools/cat.exe .\temp\getcrtsha256.txt') do @set getcrtsha256=%%i 
+if "%getcrtsha256%" == "" ( title error code : dg6 & echo error code : dg6 & echo ´íÎó£¡hash²»ÄÜÎª¿Õ£¡ & echo ¿ÉÄÜÔ­Òò£º & echo ÍøÂç²»ÎÈ¶¨»òÕßÎ¬»¤ÖĞ... & echo °´ÈÎÒâ¼ü³¢ÊÔÖØĞÂÏÂÔØ »òÁªÏµ¹ÜÀíÔ± & pause & goto dgcrtall0 )
 if "%crtziphash%" == "%getcrtsha256%" ( echo Ö¤Êé°üÑéÖ¤³É¹¦£¡ & cls & powershell -command "Expand-Archive -Force '%~dp0./temp/crtaddall.zip' '%~dp0./temp/'" & title ×¼±¸°²×°Ö¤Êé & echo  ×¼±¸°²×°Ö¤Êé & echo ################################# & echo µ¯³ö°²×°½çÃæ Ëø¶¨´óĞ´°´ Y ¼´¿É & echo ################################################ & echo °´ÈÎÒâ¼ü¿ªÊ¼°²×° & pause & cd ./temp & call add.bat & cd .. 
-) else ( echo ?Ö¤Êé°ü²»ÍêÕû»òÒÑ±»¸ü¸Ä!!!  ³¢ÊÔÖØĞÂÏÂÔØ»òÁªÏµ¹ÜÀíÔ± & echo °´ÈÎÒâ¼ü³¢ÊÔÖØĞÂÏÂÔØ & pause & goto dgcrtall
+) else ( echo ?Ö¤Êé°ü²»ÍêÕû»òÒÑ±»¸ü¸Ä!!!  ³¢ÊÔÖØĞÂÏÂÔØ»òÁªÏµ¹ÜÀíÔ± & echo °´ÈÎÒâ¼ü³¢ÊÔÖØĞÂÏÂÔØ & pause & goto dgcrtall0
 )
 
 
@@ -337,7 +341,7 @@ echo ²¿·Ö½Å±¾ÒÀÀµÍØÕ¹¹¤¾ß°ü
 echo ÈçÓöÍøÂç»·¾³²î ¿É²»°²×° ·ñÔòÒ»°ãÇ¿ÁÒ½¨Òé°²×°
 echo ÊäÈë 1 °²×°ÍêÕû¹¤¾ß°ü ÍêÕû°ü°üº¬ËùÓĞ¹¤¾ß ¹¦ÄÜĞÔÇ¿ ÍÆ¼ö ½âÑ¹ºóÔ¼ 40 MB
 echo ÊäÈë 2 °²×°Ö÷Òª¹¤¾ß°ü Ö÷Òª°ü°üº¬´ó²¿·Ö³£ÓÃ¹¤¾ß ¿ÉÂú×ã´ó²¿·ÖÒÀÀµºÍÍØÕ¹ĞÔ ÍÆ¼ö ½âÑ¹ºóÔ¼ 30 MB
-echo ÊäÈë 3 ÂÔ¹ı°²×°¶îÍâ¹¤¾ß°ü ½ö½¨ÒéÍøÂç·Ç³£²îÊ±Ñ¡Ôñ
+echo ÊäÈë 3 ÂÔ¹ı°²×°¶îÍâ¹¤¾ß°ü 
 set /p toolsin=
 if "%tools%"=="1" (
 cls
@@ -372,48 +376,48 @@ goto dgmoretools
 
 :dgalltools
 title ÏÂÔØÍêÕû¹¤¾ß°üing...
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/toolsall.7z https://dg.limoe.net/apps/tools/all.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/toolsall.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/alls.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/toolsall.7z') do @set maintoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolsallsha256.txt -q https://dg.limoe.net/apps/tools/7zallsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolsallsha256.txt') do @set getmaintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\toolsall.7z https://dg.limoe.net/apps/tools/all.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\toolsall.7z
+powershell -command "Expand-Archive -Force '%~dp0.\alls.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\toolsall.7z') do @set maintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolsallsha256.txt -q https://dg.limoe.net/apps/tools/7zallsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolsallsha256.txt') do @set getmaintoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgalltools1 )
 if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦!  & goto dgot ) else ( goto dgalltools1 )
 
 : dg1
 
 :dgalltools1
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/toolsall.7z https://dg1.limoe.net/apps/tools/all.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/toolsall.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/alls.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/toolsall.7z') do @set maintoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolsallsha256.txt -q https://dg1.limoe.net/apps/tools/7zallsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolsallsha256.txt') do @set getmaintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\toolsall.7z https://dg1.limoe.net/apps/tools/all.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\toolsall.7z
+powershell -command "Expand-Archive -Force '%~dp0.\alls.zip' '%~dp0./apps/'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\toolsall.7z') do @set maintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolsallsha256.txt -q https://dg1.limoe.net/apps/tools/7zallsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolsallsha256.txt') do @set getmaintoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgalltools2 )
 if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦!  & goto dgot ) else ( goto dgalltools2 )
 
 : dg2
 
 :dgalltools2
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/toolsall.7z https://dg2.limoe.net/apps/tools/all.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/toolsall.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/alls.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/toolsall.7z') do @set maintoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolsallsha256.txt -q https://dg2.limoe.net/apps/tools/7zallsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolsallsha256.txt') do @set getmaintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\toolsall.7z https://dg2.limoe.net/apps/tools/all.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\toolsall.7z
+powershell -command "Expand-Archive -Force '%~dp0.\alls.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\toolsall.7z') do @set maintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolsallsha256.txt -q https://dg2.limoe.net/apps/tools/7zallsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolsallsha256.txt') do @set getmaintoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgalltools3 )
 if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦!  & goto dgot ) else ( goto dgalltools3 )
 
 : dg3
 
 :dgalltools3
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/toolsall.7z https://dg3.limoe.net/apps/tools/all.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/toolsall.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/alls.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/toolsall.7z') do @set maintoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolsallsha256.txt -q https://dg3.limoe.net/apps/tools/7zallsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolsallsha256.txt') do @set getmaintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\toolsall.7z https://dg3.limoe.net/apps/tools/all.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\toolsall.7z
+powershell -command "Expand-Archive -Force '%~dp0.\alls.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\toolsall.7z') do @set maintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolsallsha256.txt -q https://dg3.limoe.net/apps/tools/7zallsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolsallsha256.txt') do @set getmaintoolshash=%%i 
 if "%getmaintoolshash%" == "" ( title error code : dg7 & echo error code : dg7 & echo ÏÂÔØ¹¤¾ß°üÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgalltools )
 if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦!  & goto dgot ) else ( title error:dg7 & title error:dg7 & echo ÏÂÔØ¹¤¾ß°üÊ±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto dgalltools )
 
@@ -425,67 +429,69 @@ if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦!  & goto dgot
 : dg
 :dgmaintools
 title ÏÂÔØÖ÷Òª¹¤¾ß°üing...
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/toolsmain.7z https://dg.limoe.net/apps/tools/main.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/toolsall.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/main.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/toolsmain.7z') do @set maintoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolssha256.txt -q https://dg.limoe.net/apps/tools/7zmainsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolssha256.txt') do @set getmaintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\toolsmain.7z https://dg.limoe.net/apps/tools/main.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\toolsall.7z
+powershell -command "Expand-Archive -Force '%~dp0.\main.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe ./temp/toolsmain.7z') do @set maintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolssha256.txt -q https://dg.limoe.net/apps/tools/7zmainsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolssha256.txt') do @set getmaintoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgmaintools1 )
 if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦! & goto dgot ) else ( goto dgmaintools1 )
 
 : dg1
 :dgmaintools1
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/toolsmain.7z https://dg1.limoe.net/apps/tools/main.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/toolsall.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/main.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/toolsmain.7z') do @set maintoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolssha256.txt -q https://dg1.limoe.net/apps/tools/7zmainsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolssha256.txt') do @set getmaintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\toolsmain.7z https://dg1.limoe.net/apps/tools/main.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\toolsall.7z
+powershell -command "Expand-Archive -Force '%~dp0.\main.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\toolsmain.7z') do @set maintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolssha256.txt -q https://dg1.limoe.net/apps/tools/7zmainsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolssha256.txt') do @set getmaintoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgmaintools1 )
 if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦! & goto dgot ) else ( goto dgmaintools2 )
 
 : dg2
 
 :dgmaintools2
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/toolsmain.7z https://dg2.limoe.net/apps/tools/main.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/toolsall.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/main.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/toolsmain.7z') do @set maintoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolssha256.txt -q https://dg2.limoe.net/apps/tools/7zmainsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolssha256.txt') do @set getmaintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\toolsmain.7z https://dg2.limoe.net/apps/tools/main.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\toolsall.7z
+powershell -command "Expand-Archive -Force '%~dp0.\main.zip' '%~dp0.\apps\'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\toolsmain.7z') do @set maintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolssha256.txt -q https://dg2.limoe.net/apps/tools/7zmainsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolssha256.txt') do @set getmaintoolshash=%%i 
 if "%getmaintoolshash%" == "" ( goto dgmaintools1 )
 if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦! & goto dgot ) else ( goto dgmaintools3 )
 
 : dg3
 
 :dgmaintools3
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/toolsmain.7z https://dg3.limoe.net/apps/tools/main.7z & timeout /nobreak /t 1
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/toolsall.7z
-powershell -command "Expand-Archive -Force '%~dp0./temp/main.zip' '%~dp0./.minecraft/apps/'"
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/toolsmain.7z') do @set maintoolshash=%%i 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/getmaintoolssha256.txt -q https://dg3.limoe.net/apps/tools/7zmainsha256.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gettoolssha256.txt') do @set getmaintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\toolsmain.7z https://dg3.limoe.net/apps/tools/main.7z & timeout /nobreak /t 1
+powershell .\apps\7z\7za.exe e -y .\temp\toolsall.7z
+powershell -command "Expand-Archive -Force '%~dp0.\main.zip' '%~dp0.\apps'"
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\toolsmain.7z') do @set maintoolshash=%%i 
+powershell .\apps\wget\wget.exe -O .\temp\getmaintoolssha256.txt -q https://dg3.limoe.net/apps/tools/7zmainsha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\gettoolssha256.txt') do @set getmaintoolshash=%%i 
 if "%getmaintoolshash%" == "" ( title error code : dg8 & echo error code : dg8 & echo ÏÂÔØ¹¤¾ß°üÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgmaintools )
 if "%maintoolshash%" == "%getmaintoolshash%" ( echo ¹¤¾ß°üÑéÖ¤³É¹¦! & goto dgot ) else ( title error:dg8 & title error:dg8 & echo ÏÂÔØ¹¤¾ß°üÊ±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto dgmaintools )
 
 
 :dgot
+del .\main.zip
+del .\alls.zip
 
-: powershell ./.minecraft/apps/wget/wget.exe -O ./temp/112at.bat -q https://
-: powershell ./.minecraft/apps/wget/wget.exe -O ./temp/112atbathash.txt -q https://
-: for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/112at.bat') do @set atbat112hash=%%i 
-: for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/112atbathash.txt') do @set getatbat112hash=%%i 
+: powershell .\apps\wget\wget.exe -O .\temp\112at.bat -q https://
+: powershell .\apps\wget\wget.exe -O .\temp\112atbathash.txt -q https://
+: for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\112at.bat') do @set atbat112hash=%%i 
+: for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\112atbathash.txt') do @set getatbat112hash=%%i 
 : if "%getatbat112hash%" == "" ( goto dgot1 )
 : if "%atbat112hash%" == "%getatbat112hash%" ( goto dgot0 ) else ( goto dgot1 )
 
 
 :dgot1
 
-: powershell ./.minecraft/apps/wget/wget.exe -O ./temp/112at.bat -q https://
-: powershell ./.minecraft/apps/wget/wget.exe -O ./temp/112atbathash.txt -q https://
-: for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/112at.bat') do @set atbat112hash=%%i 
-: for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/112atbathash.txt') do @set getatbat112hash=%%i 
+: powershell .\apps\wget\wget.exe -O .\temp\112at.bat -q https://
+: powershell .\apps\wget\wget.exe -O .\temp\112atbathash.txt -q https://
+: for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\112at.bat') do @set atbat112hash=%%i 
+: for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\112atbathash.txt') do @set getatbat112hash=%%i 
 
 : if "%getatbat112hash%" == "" ( echo ±ØÒª¹¤×÷Î´Íê³É! °´ÈÎÒâ¼üÔÙ´Î³¢ÊÔ & echo ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgot )
 : if "%atbat112hash%" == "%getatbat112hash%" () else ( echo ±ØÒª¹¤×÷Î´Íê³É! °´ÈÎÒâ¼üÔÙ´Î³¢ÊÔ & echo ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgot )
@@ -499,10 +505,11 @@ title ×¼±¸¹¤×÷ÒÑÍê³É£¡-Neko Minecraft
 echo ×¼±¸¹¤×÷ÒÑÍê³É£¡
 echo 2Ãëºó½øÈëÏÂÔØÓÎÏ·
 timeout /nobreak /t 2
-
+cls
 
 : °²Ñbß[‘ò
 :installgame
+
 
 title ÇëÊäÈëÄúÏëÒª°²×°µÄÓÎÏ·°æ±¾²¢»Ø³µ -Neko Minecraft
 echo ##################################################
@@ -572,32 +579,32 @@ goto installgame
 :allinstall
 title ÕıÔÚÏÂÔØÓÎÏ·ing... ¡ªNeko Minecraft
 : dg
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/resourcepacks.7z https://dg2.limoe.net/mc/112/dg/resourcepacks.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\resourcepacks.7z https://dg2.limoe.net/mc/112/dg/resourcepacks.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/resourcepacks.7z
+powershell .\apps\7z\7za.exe e -y .\temp\resourcepacks.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/resourcepacks.7z') do @set reshash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/ressha256.txt -q https://dg2.limoe.net/mc/up/ressha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\resourcepacks.7z') do @set reshash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\ressha256.txt -q https://dg2.limoe.net/mc/up/ressha256.json & timeout /nobreak /t 1
 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/ressha256.txt') do @set getreshash=%%i
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\ressha256.txt') do @set getreshash=%%i
 if "%getreshash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto allinstall2 )
-if "%reshash%" == "%getreshash%" ( echo Ğ£Ñé³É¹¦! & powershell -command "Expand-Archive -Force '%~dp0./temp/resourcepacks.zip' '%~dp0./.minecraft/resourcepacks/'" & goto maininstall 
+if "%reshash%" == "%getreshash%" ( echo Ğ£Ñé³É¹¦! & powershell -command "Expand-Archive -Force '%~dp0.\resourcepacks.zip' '%~dp0.\resourcepacks\'" & goto maininstall 
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ...  & goto allinstall3 )
 
 
 :allinstall3
 : dg3
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/resourcepacks.7z https://dg3.limoe.net/mc/112/dg/resourcepacks.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\resourcepacks.7z https://dg3.limoe.net/mc/112/dg/resourcepacks.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/resourcepacks.7z
+powershell .\apps\7z\7za.exe e -y .\temp\resourcepacks.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/resourcepacks.7z') do @set reshash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/ressha256.txt -q https://dg3.limoe.net/mc/up/ressha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\resourcepacks.7z') do @set reshash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\ressha256.txt -q https://dg3.limoe.net/mc/up/ressha256.json & timeout /nobreak /t 1
 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/ressha256.txt') do @set getreshash=%%i
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\ressha256.txt') do @set getreshash=%%i
 if "%getreshash%" == "" ( title error code : dg9 & echo error code : dg9 & echo ÏÂÔØ²ÄÖÊÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto allinstall )
-if "%reshash%" == "%getreshash%" ( echo Ğ£Ñé³É¹¦! & powershell -command "Expand-Archive -Force '%~dp0./temp/resourcepacks.zip' '%~dp0./.minecraft/resourcepacks/'" & goto maininstall 
+if "%reshash%" == "%getreshash%" ( echo Ğ£Ñé³É¹¦! & powershell -command "Expand-Archive -Force '%~dp0.\resourcepacks.zip' '%~dp0.\resourcepacks\'" & goto maininstall 
  ) else ( 
 title error:dg9 & title error:dg9 & echo ÏÂÔØ²ÄÖÊÊ±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto allinstall )
 
@@ -607,18 +614,19 @@ title error:dg9 & title error:dg9 & echo ÏÂÔØ²ÄÖÊÊ±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °
 : ÏÂÔØ¹âÓ° dg10
 
 :maininstall
+del .\resourcepacks.zip
 : dg
 title ÕıÔÚÏÂÔØÓÎÏ·ing... ¡ªNeko Minecraft
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/shaderpacks.7z https://dg.limoe.net/mc/112/dg/shaderpacks.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\shaderpacks.7z https://dg.limoe.net/mc/112/dg/shaderpacks.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/shaderpacks.7z
+powershell .\apps\7z\7za.exe e -y .\temp\shaderpacks.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/shaderpacks.7z') do @set shashahash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/shasha256.txt -q https://dg.limoe.net/mc/up/shasha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\shaderpacks.7z') do @set shashahash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\shasha256.txt -q https://dg.limoe.net/mc/up/shasha256.json & timeout /nobreak /t 1
 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/shasha256.txt') do @set getshashahash=%%i
+for /F %%i in ('powershell -command .\apps\tools/cat.exe .\temp\shasha256.txt') do @set getshashahash=%%i
 if "%getshashahash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto maininstall1 )
-if "%shashahash%" == "%getshashahash%" ( echo Ğ£Ñé³É¹¦. & powershell -command "Expand-Archive -Force '%~dp0./temp/shaderpacks.zip' '%~dp0./.minecraft/shaderpacks/'" & goto miniinstall
+if "%shashahash%" == "%getshashahash%" ( echo Ğ£Ñé³É¹¦. & powershell -command "Expand-Archive -Force '%~dp0.\shaderpacks.zip' '%~dp0.\shaderpacks\'" & goto miniinstall
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ...  & goto maininstall1 )
 
@@ -626,16 +634,16 @@ echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ...  & goto maininstall1 )
 
 :maininstall1
 : dg1
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/shaderpacks.7z https://dg1.limoe.net/mc/112/dg/shaderpacks.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\shaderpacks.7z https://dg1.limoe.net/mc/112/dg/shaderpacks.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/shaderpacks.7z
+powershell .\apps\7z\7za.exe e -y .\temp\shaderpacks.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/shaderpacks.7z') do @set shashahash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/shasha256.txt -q https://dg1.limoe.net/mc/up/shasha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\shaderpacks.7z') do @set shashahash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\shasha256.txt -q https://dg1.limoe.net/mc/up/shasha256.json & timeout /nobreak /t 1
 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/shasha256.txt') do @set getshashahash=%%i
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\shasha256.txt') do @set getshashahash=%%i
 if "%getshashahash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto maininstall2 )
-if "%shashahash%" == "%getshashahash%" ( echo Ğ£Ñé³É¹¦. & powershell -command "Expand-Archive -Force '%~dp0./temp/shaderpacks.zip' '%~dp0./.minecraft/shaderpacks/'" & goto miniinstall
+if "%shashahash%" == "%getshashahash%" ( echo Ğ£Ñé³É¹¦. & powershell -command "Expand-Archive -Force '%~dp0.\shaderpacks.zip' '%~dp0.\shaderpacks\'" & goto miniinstall
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ...  & goto maininstall2 )
 
@@ -643,32 +651,32 @@ echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ...  & goto maininstall2 )
 
 :maininstall2
 : dg2
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/shaderpacks.7z https://dg2.limoe.net/mc/112/dg/shaderpacks.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\shaderpacks.7z https://dg2.limoe.net/mc/112/dg/shaderpacks.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/shaderpacks.7z
+powershell .\apps\7z\7za.exe e -y .\temp\shaderpacks.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/shaderpacks.7z') do @set shashahash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/shasha256.txt -q https://dg2.limoe.net/mc/up/shasha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\shaderpacks.7z') do @set shashahash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\shasha256.txt -q https://dg2.limoe.net/mc/up/shasha256.json & timeout /nobreak /t 1
 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/shasha256.txt') do @set getshashahash=%%i
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\shasha256.txt') do @set getshashahash=%%i
 if "%getshashahash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto maininstall3 )
-if "%shashahash%" == "%getshashahash%" ( echo Ğ£Ñé³É¹¦. & powershell -command "Expand-Archive -Force '%~dp0./temp/shaderpacks.zip' '%~dp0./.minecraft/shaderpacks/'" & goto miniinstall
+if "%shashahash%" == "%getshashahash%" ( echo Ğ£Ñé³É¹¦. & powershell -command "Expand-Archive -Force '%~dp0.\shaderpacks.zip' '%~dp0.\shaderpacks\'" & goto miniinstall
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ...  & goto maininstall3 )
 
 
 :maininstall3
 : dg3
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/shaderpacks.7z https://dg3.limoe.net/mc/112/dg/shaderpacks.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\shaderpacks.7z https://dg3.limoe.net/mc/112/dg/shaderpacks.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/shaderpacks.7z
+powershell .\apps\7z\7za.exe e -y .\temp\haderpacks.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/shaderpacks.7z') do @set shashahash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/shasha256.txt -q https://dg3.limoe.net/mc/up/shasha256.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\shaderpacks.7z') do @set shashahash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\shasha256.txt -q https://dg3.limoe.net/mc/up/shasha256.json & timeout /nobreak /t 1
 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/shasha256.txt') do @set getshashahash=%%i
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\shasha256.txt') do @set getshashahash=%%i
 if "%getshashahash%" == "" ( title error code : dg10 & echo error code : dg10 & echo ÏÂÔØ¹âÓ°Ê§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto maininstall )
-if "%shashahash%" == "%getshashahash%" ( echo Ğ£Ñé³É¹¦. & powershell -command "Expand-Archive -Force '%~dp0./temp/shaderpacks.zip' '%~dp0./.minecraft/shaderpacks/'" & goto miniinstall
+if "%shashahash%" == "%getshashahash%" ( echo Ğ£Ñé³É¹¦. & powershell -command "Expand-Archive -Force '%~dp0.\shaderpacks.zip' '%~dp0.\shaderpacks\'" & goto miniinstall
  ) else ( 
 title error:dg10 & title error:dg10 & echo ÏÂÔØ¹âÓ°Ê±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto maininstall )
 
@@ -680,19 +688,25 @@ title error:dg10 & title error:dg10 & echo ÏÂÔØ¹âÓ°Ê±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo
 
 
 :miniinstall
+del .\shaderpacks.zip
+cd ..
+:miniinstall0
+
+
 : dg
+
 title ÕıÔÚÏÂÔØÓÎÏ·ing... ¡ªNeko Minecraft
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/game.7z https://dg2.limoe.net/mc/112/dg/game.7z & timeout /nobreak /t 1
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\game.7z https://dg2.limoe.net/mc/112/dg/game.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/game.7z
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/game.7z') do @set gamehash=%%i
+powershell .\.minecraft\apps\7z\7za.exe e -y .\.minecraft\temp\game.7z
+for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe .\.minecraft\temp\game.7z') do @set gamehash=%%i
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/gamesha256.txt -q https://dg2.limoe.net/mc/up/game.json & timeout /nobreak /t 1
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\gamesha256.txt -q https://dg2.limoe.net/mc/up/game.json & timeout /nobreak /t 1
 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gamesha256.txt') do @set getgamehash=%%i
+for /F %%i in ('powershell -command .\.minecraft\apps\tools\cat.exe .\.minecraft\temp\gamesha256.txt') do @set getgamehash=%%i
 if "%getgamehash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto miniinstall3 )
-if "%gamehash%" == "%getgamehash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0./temp/game.zip' '%~dp0./'" & goto dgmods
+if "%gamehash%" == "%getgamehash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0.\game.zip' '%~dp0.\'" & goto dgmods
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ...  & goto miniinstall3 )
 
@@ -701,18 +715,18 @@ echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ...  & goto miniinstall3 )
 :miniinstall3
 : dg3
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/game.7z https://dg3.limoe.net/mc/112/dg/game.7z & timeout /nobreak /t 1
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\game.7z https://dg3.limoe.net/mc/112/dg/game.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/game.7z
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/game.7z') do @set gamehash=%%i
+powershell .\.minecraft\apps\7z\7za.exe e -y .\.minecraft\temp\game.7z
+for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe .\.minecraft\temp\game.7z') do @set gamehash=%%i
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/gamesha256.txt -q https://dg3.limoe.net/mc/up/game.json & timeout /nobreak /t 1
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\gamesha256.txt -q https://dg3.limoe.net/mc/up/game.json & timeout /nobreak /t 1
 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/gamesha256.txt') do @set getgamehash=%%i
-if "%getgamehash%" == "" ( title error code : dg11 & echo error code : dg11 & echo ÏÂÔØÓÎÏ·±¾ÌåÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto miniinstall )
-if "%gamehash%" == "%getgamehash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0./temp/game.zip' '%~dp0./'" & goto dgmods
+for /F %%i in ('powershell -command .\.minecraft\apps\tools\cat.exe .\.minecraft\temp\gamesha256.txt') do @set getgamehash=%%i
+if "%getgamehash%" == "" ( title error code : dg11 & echo error code : dg11 & echo ÏÂÔØÓÎÏ·±¾ÌåÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto miniinstall0 )
+if "%gamehash%" == "%getgamehash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0..\game.zip' '%~dp0.\'" & goto dgmods
  ) else ( 
-title error:dg11 & title error:dg11 & echo ÏÂÔØÓÎÏ·±¾ÌåÊ±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto miniinstall )
+title error:dg11 & title error:dg11 & echo ÏÂÔØÓÎÏ·±¾ÌåÊ±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto miniinstall0 )
 
 
 
@@ -721,18 +735,23 @@ title error:dg11 & title error:dg11 & echo ÏÂÔØÓÎÏ·±¾ÌåÊ±¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & 
 : mods dg12
 
 :dgmods
+del .\game.zip
+cd .minecraft
+
+:dgmods0
+
 : dg
 title ÕıÔÚÏÂÔØÓÎÏ·ing... ¡ªNeko Minecraft
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/mods.7z https://dg.limoe.net/mc/112/dg/mods.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\mods.7z https://dg.limoe.net/mc/112/dg/mods.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/mods.7z
+powershell .\apps\7z\7za.exe e -y .\temp\mods.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/mods.7z') do @set modshash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/modssha256.txt -q https://dg.limoe.net/mc/up/mods.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/modssha256.txt') do @set getmodshash=%%i
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\mods.7z') do @set modshash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\modssha256.txt -q https://dg.limoe.net/mc/up/mods.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\modssha256.txt') do @set getmodshash=%%i
 if "%getmodshash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods1 )
-if "%modshash%" == "%getmodshash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0./temp/mods.zip' '%~dp0./.minecraft/mods/'" & goto dgupdate1
+if "%modshash%" == "%getmodshash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0.\mods.zip' '%~dp0.\mods\'" & goto dgupdate1
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods1 )
 
@@ -741,15 +760,15 @@ echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods1 )
 :dgmods1
 : dg1
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/mods.7z https://dg1.limoe.net/mc/112/dg/mods.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\mods.7z https://dg1.limoe.net/mc/112/dg/mods.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/mods.7z
+powershell .\apps\7z\7za.exe e -y .\temp\mods.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/mods.7z') do @set modshash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/modssha256.txt -q https://dg1.limoe.net/mc/up/mods.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/modssha256.txt') do @set getmodshash=%%i
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\mods.7z') do @set modshash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\modssha256.txt -q https://dg1.limoe.net/mc/up/mods.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\modssha256.txt') do @set getmodshash=%%i
 if "%getmodshash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods2 )
-if "%modshash%" == "%getmodshash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0./temp/mods.zip' '%~dp0./.minecraft/mods/'" & goto dgupdate1
+if "%modshash%" == "%getmodshash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0.\mods.zip' '%~dp0.\mods\'" & goto dgupdate1
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods2 )
 
@@ -759,15 +778,15 @@ echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods2 )
 :dgmods2
 : dg2
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/mods.7z https://dg2.limoe.net/mc/112/dg/mods.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\mods.7z https://dg2.limoe.net/mc/112/dg/mods.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/mods.7z
+powershell .\apps\7z\7za.exe e -y .\temp\mods.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/mods.7z') do @set modshash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/modssha256.txt -q https://dg2.limoe.net/mc/up/mods.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/modssha256.txt') do @set getmodshash=%%i
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\mods.7z') do @set modshash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\modssha256.txt -q https://dg2.limoe.net/mc/up/mods.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\modssha256.txt') do @set getmodshash=%%i
 if "%getmodshash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods3 )
-if "%modshash%" == "%getmodshash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0./temp/mods.zip' '%~dp0./.minecraft/mods/'" & goto dgupdate1
+if "%modshash%" == "%getmodshash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0.\mods.zip' '%~dp0.\mods\'" & goto dgupdate1
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods3 )
 
@@ -777,15 +796,15 @@ echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgmods3 )
 :dgmods3
 : dg3
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/mods.7z https://dg3.limoe.net/mc/112/dg/mods.7z & timeout /nobreak /t 1
+powershell .\apps\wget\wget.exe -O .\temp\mods.7z https://dg3.limoe.net/mc/112/dg/mods.7z & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/mods.7z
+powershell .\apps\7z\7za.exe e -y .\temp\mods.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/mods.7z') do @set modshash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/modssha256.txt -q https://dg3.limoe.net/mc/up/mods.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/modssha256.txt') do @set getmodshash=%%i
+for /F %%i in ('powershell -command .\apps\hash\sha256sum.exe .\temp\mods.7z') do @set modshash=%%i
+powershell .\apps\wget\wget.exe -O .\temp\modssha256.txt -q https://dg3.limoe.net/mc/up/mods.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\apps\tools\cat.exe .\temp\modssha256.txt') do @set getmodshash=%%i
 if "%getmodshash%" == "" ( title error code : dg12 & echo error code : dg12 & echo ÏÂÔØmodÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgmods )
-if "%modshash%" == "%getmodshash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0./temp/mods.zip' '%~dp0./.minecraft/mods/'" & goto dgupdate1
+if "%modshash%" == "%getmodshash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0.\mods.zip' '%~dp0.\mods\'" & goto dgupdate1
  ) else ( 
 title error:dg12 & title error:dg12 & echo ÏÂÔØmod¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto dgmods )
 
@@ -797,23 +816,26 @@ title error:dg12 & title error:dg12 & echo ÏÂÔØmod¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´
 
 
 :dgupdate1
+del mods.zip
+cd ..
+:dgupdate10
+
 : dg
 title ÕıÔÚÏÂÔØÓÎÏ·ing... ¡ªNeko Minecraft
-echo ÕıÔÚÏÂÔØ¸üĞÂÄÚÈİ...
-cd temp
-call 112at.bat
-cd ..
-timeout /nobreak /t 3
+: cd temp
+: call 112at.bat
+: cd ..
+: timeout /nobreak /t 3
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/update1.7z --http-user=6D9Fkz2Kfmj5QLR --http-passwd=cexL8ZBrwqBpwKv https://b3hxd9kwkwqba3r.limoe.net/dg/up1/update1.7z?token=sa7x39r & timeout /nobreak /t 1
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\update1.7z --http-user=6D9Fkz2Kfmj5QLR --http-passwd=cexL8ZBrwqBpwKv https://b3hxd9kwkwqba3r.limoe.net/dg/up1/update1.7z?token=sa7x39r & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/update1.7z
+powershell .\.minecraft\apps\7z\7za.exe e -y .\.minecraft\temp\update1.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/update1.zip') do @set update1hash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/update1sha256.txt -q https://dg2.limoe.net/mc/112/dg/up1/update1.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/update1sha256.txt') do @set getupdate1hash=%%i
+for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe .\.minecraft\temp\update1.7z') do @set update1hash=%%i
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\update1sha256.txt -q https://dg2.limoe.net/mc/112/dg/up1/update1.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\.minecraft\apps\tools\cat.exe .\temp\update1sha256.txt') do @set getupdate1hash=%%i
 if "%getupdate1hash%" == "" ( echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgupdate13 )
-if "%update1hash%" == "%getupdate1hash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0./temp/update1.zip' '%~dp0./'" goto inend
+if "%update1hash%" == "%getupdate1hash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0.\update1.zip' '%~dp0.\'" & goto inend
  ) else ( 
 echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgupdate13 )
 
@@ -821,46 +843,58 @@ echo Ğ£ÑéÊ§°Ü! & echo ÔÙ´Î³¢ÊÔÖĞ... & goto dgupdate13 )
 
 :dgupdate13
 
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/update1.7z --http-user=6D9Fkz2Kfmj5QLR --http-passwd=cexL8ZBrwqBpwKv https://64esj8zyucgvifb.limoe.net/dg/up1/update1.7z?token=sa7x39r & timeout /nobreak /t 1
+powershell .\.minecraft\apps\wget\wget.exe -O .\temp\update1.7z --http-user=6D9Fkz2Kfmj5QLR --http-passwd=cexL8ZBrwqBpwKv https://64esj8zyucgvifb.limoe.net/dg/up1/update1.7z?token=sa7x39r & timeout /nobreak /t 1
 
-powershell ./.minecraft/apps/7z/7za.exe e ./temp/update1.7z
+powershell .\.minecraft\apps\7z\7za.exe e -y .\.minecraft\temp\update1.7z
 
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/update1.zip') do @set update1hash=%%i
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/update1sha256.txt -q https://dg3.limoe.net/mc/112/dg/up1/update1.json & timeout /nobreak /t 1
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/update1sha256.txt') do @set getupdate1hash=%%i
-if "%getupdate1hash%" == "" ( title error code : dg13 & echo error code : dg13 & echo ÏÂÔØ¸üĞÂÄÚÈİÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgupdate1 )
-if "%update1hash%" == "%getupdate1hash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0./temp/update1.zip' '%~dp0./'" goto inend
+for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe .\temp\update1.7z') do @set update1hash=%%i
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\update1sha256.txt -q https://dg3.limoe.net/mc/112/dg/up1/update1.json & timeout /nobreak /t 1
+for /F %%i in ('powershell -command .\.minecraft\apps\tools\cat.exe .\temp\update1sha256.txt') do @set getupdate1hash=%%i
+if "%getupdate1hash%" == "" ( title error code : dg13 & echo error code : dg13 & echo ÏÂÔØ¸üĞÂÄÚÈİÊ§°Ü£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ  ÈçÓöÔÙ´ÎÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ± & pause & goto dgupdate10 )
+if "%update1hash%" == "%getupdate1hash%" ( echo Ğ£Ñé³É¹¦£¡ & powershell -command "Expand-Archive -Force '%~dp0.\update1.zip' '%~dp0.\'" & goto inend
  ) else ( 
-title error:dg13 & title error:dg13 & echo ÏÂÔØ¸üĞÂÄÚÈİ¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto dgupdate13 )
+title error:dg13 & title error:dg13 & echo ÏÂÔØ¸üĞÂÄÚÈİ¶à´Î±»¸ü¸Ä»ò²»ÍêÕû£¡ & echo °´ÈÎÒâ¼ü³¢ÊÔÔÙ´ÎÏÂÔØ ÈçÓöÔÙ´ÎÏÂÔØÊ§°Ü ÇëÁªÏµ¹ÜÀíÔ±  & pause & goto dgupdate10 )
 
 
 :inend
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/inerror.bat -q https://dg2.limoe.net/apps/error/error.bat
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/errorbat.txt -q https://dg2.limoe.net/apps/error/errorsha256.json
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/error.bat') do @set errorbathash=%%i 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/errorbat.txt') do @set geterrorhash=%%i 
+del update1.zip
+
+
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\inerror.bat -q https://dg2.limoe.net/apps/error/error.bat
+
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp/errorbat.txt -q https://dg2.limoe.net/apps/error/errorsha256.json
+
+for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe .\.minecraft\temp\error.bat') do @set errorbathash=%%i 
+for /F %%i in ('powershell -command .\.minecraft\apps\tools\cat.exe .\.minecraft\temp\errorbat.txt') do @set geterrorhash=%%i 
 if "%geterrorhash%" == "" ( goto inend1 )
-if "%errorbathash%" == "%geterrorhash%" ( cd temp & call inerror.bat & cd .. & goto inend0 )
+if "%errorbathash%" == "%geterrorhash%" ( cd .minecraft & cd temp & call inerror.bat & cd .. & goto inend0 )
 
 :inend1
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/inerror.bat -q https://dg2.limoe.net/apps/error/error.bat
-powershell ./.minecraft/apps/wget/wget.exe -O ./temp/errorbat.txt -q https://dg2.limoe.net/apps/error/errorsha256.json
-for /F %%i in ('powershell -command ./.minecraft/apps/hash/sha256sum.exe ./temp/error.bat') do @set errorbathash=%%i 
-for /F %%i in ('powershell -command ./.minecraft/apps/tools/cat.exe ./temp/errorbat.txt') do @set geterrorhash=%%i 
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\inerror.bat -q https://dg2.limoe.net/apps/error/error.bat
+
+powershell .\.minecraft\apps\wget\wget.exe -O .\.minecraft\temp\errorbat.txt -q https://dg2.limoe.net/apps/error/errorsha256.json
+
+for /F %%i in ('powershell -command .\.minecraft\apps\hash\sha256sum.exe .\.minecraft\temp\error.bat') do @set errorbathash=%%i 
+for /F %%i in ('powershell -command .\.minecraft\apps\tools\cat.exe .\.minecraft\temp\errorbat.txt') do @set geterrorhash=%%i 
 
 if "%geterrorhash%" == "" ( goto inend0 )
-if "%errorbathash%" == "%geterrorhash%" ( cd temp & call inerror.bat & cd .. )
+if "%errorbathash%" == "%geterrorhash%" ( cd .minecraft & cd temp & call inerror.bat & cd .. )
 
 :inend0
-powershell ./.minecraft/apps/wget/wget.exe --post-file=./temp/debug.txt -q https://postapi.limoe.net/bug/post/?token=1fs01c
-
 title ÏÂÔØÍê³É£¡ ¡ªNeko Minecraft
-rmdir /s/q temp
+
 echo ÏÂÔØÍê³É£¡
 echo °´ÈÎÒâ¼ü³¢ÊÔ´ò¿ªÆô¶¯Æ÷
 echo Èç¹ûÎŞ·¨´ò¿ª ½«³¢ÊÔ°²×°JAVA
 echo ×¢Òâ °²×°JAVA²»½¨Òé¸ü¸Ä°²×°Â·¾¶
 echo Èç¹û°²×°ºóÈÔÈ»±¨´í Çë²é¿´°ïÖúĞÅÏ¢»òÁªÏµ¹ÜÀíÔ±
+timeout /nobreak /t 5
+
+powershell .\.minecraft\apps\wget\wget.exe --post-file=.\.minecraft\temp\debug.txt -q https://postapi.limoe.net/bug/post/?token=1fs01c
+
+cd .minecraft
+rmdir /s/q temp
+cd ..
 pause
 powershell ./Nekomc.exe
 timeout /nobreak /t 4
